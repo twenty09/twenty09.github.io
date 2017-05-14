@@ -1,0 +1,102 @@
+// FUNCTIONS
+// ==========================================
+
+
+
+// SCREENS
+// ==========================================
+
+/* 
+ * Header
+ */
+
+
+.header{
+    padding: 0;
+    height: pt(10);
+    overflow: hidden;
+    background: $background-inside;
+    margin: 0;
+    padding-left: pt(3);
+    padding-right: pt(4);
+    @include align-items(center);
+    
+    .logo {
+        width: pt(36);
+        font-family: 'Playfair Display', serif;
+        font-size: pt(6);
+        font-weight: 900;
+        margin-top: -10px;
+        box-sizing: border-box;
+        span, svg{
+            display: inline-block
+        }
+        span{
+            margin-right: pt(1);
+        }
+        
+    }
+    .info {
+        width: calc(100% - 288px);
+        color: $text-color-sub;
+        font-size: 13px;
+        text-align: right;
+        box-sizing: border-box;
+    }
+
+}
+
+
+/* 
+ * Menu
+ */
+
+main{
+    .menu {
+        background: $color-secondary;
+        float: left;
+        width: 100%;
+        padding-left: $padding;
+        padding-right: $padding;
+        .item{
+            padding: 16px pt(2) 12px!important;
+            margin-left: 5px;
+            margin-right: 5px;
+            -webkit-font-smoothing: antialiased;
+            color: #999;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 16px;
+            text-transform: uppercase;
+            &.active{
+                color: $text-color;
+                background: white;
+            }
+        }
+    }
+}
+
+
+/* 
+ * Responsive
+ */
+
+@media only screen and (max-width: $med-max-width) {
+    .header{
+        .info{
+            display: none;
+        }
+    }
+    
+}
+@media only screen and (max-width: 380px) {
+    main .menu{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+
+
+

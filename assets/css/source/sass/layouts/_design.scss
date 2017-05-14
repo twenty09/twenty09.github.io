@@ -1,0 +1,35 @@
+// FUNCTIONS
+// ==========================================
+
+
+
+// SCREENS
+// ==========================================
+
+
+/* 
+ * Designs
+ */
+
+.designs{
+    padding-bottom: pt(3);
+    .design{
+        &.left{
+            padding-right: 2%;
+        }
+        &.right{
+            padding-left: 2%;
+        }
+        .name{
+            margin-top: pt(1);
+            @include font-smoothing($value: antialiased);
+        }
+    }
+}
+
+
+
+/* 
+ * Design
+ */
+

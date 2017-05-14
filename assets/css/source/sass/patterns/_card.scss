@@ -1,0 +1,51 @@
+// FUNCTIONS
+// ==========================================
+
+@mixin size-title{
+    @each $size, $value in $sizes {
+        &.#{$size} {
+            font-size: ($value * 1rem);
+        }
+    }
+}
+
+// SCREENS
+// ==========================================
+
+/* Card
+   ========================================== */
+
+.card{
+    @include flexbox(( display: flex, flex-flow: column nowrap, align-items: flex-start));
+    position: relative;
+    margin: .5rem 0 1rem 0;
+    background-color: #fff;
+    border: $border;
+    .image{
+        position: relative;
+        img{
+                display: block;
+                @include position($position:relative, $top: 0, $left:0, $bottom:0, $right: 0);
+                width: 100%;
+
+        }
+    }
+    .content{
+        @include flexbox(( display: flex));
+        padding: 1rem;
+        .title{
+            margin-bottom: 8px;
+            @include size-title;
+        }
+        p{
+            margin: 0;
+        }
+    }
+    &.basic{
+        border-color: transparent;
+        .content{
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}

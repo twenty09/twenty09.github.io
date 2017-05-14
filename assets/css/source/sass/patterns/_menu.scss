@@ -1,0 +1,96 @@
+// FUNCTIONS
+// ==========================================
+
+// Evenly items
+@mixin evenly-item {
+    $i: 1;
+    @each $item in $sixteen-items {
+        &.#{$item}.item {
+            .item {
+                width: (100% / $i);
+            }
+        }
+        $i: $i+1;
+    }
+}
+
+// SCREENS
+// ==========================================
+
+/* Menu
+   ========================================== */
+
+/*
+ * Define menu
+ */
+
+.menu {
+    @include display(flex);
+    @include align-items(center);
+    @include size($width: 100%);
+    &.basic {
+        .item {
+            &::after {
+                width: 0
+            }
+        }
+    }
+    &.divided{
+        @include border($top: $border-width,$bottom: $border-width);
+        .item{
+            &::after {
+                @include position($position:absolute, $top: 10%, $right: 0);
+                @include size($height: 80%, $width: 1px);
+                background: $border-color;
+                content: '';
+            }
+            &:first-child {
+                &::before {
+                    @include position($position:absolute, $top: 10%, $left: 0);
+                    @include size($height: 80%, $width: 1px);
+                    background: $border-color;
+                    content: '';
+                }
+            }
+        }
+    }
+    &.big {
+        .item {
+            padding: 20px 0;
+            font-size: 1.14em;
+        }
+    }
+    &.right {
+        @include justify-content(flex-end);
+    }
+    .item {
+        position: relative;
+        @include display(flex);
+        @include justify-content(center);
+        @include align-items(center);
+        padding: 10px 0;
+        &.right {
+            margin-left: auto;
+        }
+        @include font-smoothing($value: antialiased);
+    }
+}
+
+/** 
+ * Evenly items
+ */
+
+.menu {
+    &.one.item {
+        width: 100%;
+    }
+    @include evenly-item;
+}
+
+
+.menu .item{
+    h1,h2,h3,h4,h5,h6{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}

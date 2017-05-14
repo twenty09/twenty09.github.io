@@ -1,0 +1,199 @@
+// FUNCTIONS
+// ==========================================
+@function convert-percent($base-width, $width) {
+    @return ($width * 100%) / $base-width;
+}
+@function evenly-width($num: 1, $columns: $num-columns, $base: $base-width, $width: $base-width) {
+    @return ($num * ((convert-percent($base, $width) + $margin) / $columns)) - $margin;
+}
+@function column-width($num: 1, $base: $base-width, $width: $base-width) {
+    @return ($num * ((convert-percent($base, $width) + $margin) / $num-columns)) - $margin;
+}
+// Container
+@mixin container {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    max-width: $base-width;
+    width: 100%;
+    @include box-sizing(border-box);
+    &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    @media only screen and (min-width: $top-min-width) and (max-width: $top-max-width) {
+        // width: convert-percent($base-width, $tablet-width);
+        width: 100%;
+    }
+    @media only screen and (min-width: $bot-min-width) and (max-width: $bot-max-width) {
+        width: convert-percent($base-width, $mobile-landscape-width);
+    }
+    @media only screen and (max-width: $med-max-width) {
+        //width: convert-percent($base-width, $mobile-portrait-width);
+        width: 100%;
+    }
+}
+// Row
+@mixin row {
+    width: 100%;
+    @include clearfix;
+    margin-bottom: $margin;
+    @include box-sizing(border-box);
+}
+@mixin alpha {
+    margin-left: 0;
+}
+@mixin omega {
+    margin-right: 0;
+}
+// Column
+@mixin column {
+    margin-left: $margin;
+    width: 100%;
+    @include box-sizing(border-box);
+}
+// Columns
+@mixin columns {
+    @include column;
+}
+@mixin number-columns {
+    $i: 1;
+    @each $item in $sixteen-items {
+        &.#{$item} {
+            width: column-width($i, $base-width, $base-width);
+        }
+        $i: $i+1;
+    }
+}
+
+@mixin evenly-columns {
+    $i: 1;
+    @each $item in $sixteen-items {
+        @if ($i>1){
+            &.#{$item} > .column {
+                width: evenly-width(1, $i, $base-width, $base-width);
+            }
+            &.#{$item} > .column:nth-child(#{$i}n+1) {
+                @include alpha;
+            } 
+        }
+        $i: $i+1;
+    }
+}
+
+@mixin third($num: 1) {
+    width: evenly-width($num, 3, $base-width, $base-width);
+}
+@mixin offset($num: 1) {
+    padding-left: column-width($num, $base-width, $base-width) + $offset;
+}
+@mixin number-offset {
+    $i: 1;
+    @each $item in $sixteen-items {
+        @if ($i<16) {
+            .#{$item}.offset {
+                @include offset($num: $i);
+            }
+            $i: $i+1;
+        }
+    }
+}
+
+// SCREENS
+// ==========================================
+
+/* Grid
+   ========================================== */
+
+
+/* 
+ * Container 
+ */
+
+.container {
+    @include display(flex);
+    @include flex-flow(column nowrap);
+    @include justify-content(flex-start);
+    @include align-items(stretch);
+    @include align-content(stretch);
+    @include container;
+    @include number-offset;
+    &.fluid{
+        width: 100%;
+        max-width: 100%;
+    }
+    background: $background-inside;
+    &:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+/* Row */
+
+.row {
+    @include display(flex);
+    @include flex-flow(row wrap);
+    @include align-items(stretch);
+    @include row;
+    &.column,
+    &.columns{
+        width: 100%;
+        @include alpha;
+    }
+}
+
+/* Column */
+
+.row{
+    &> .column {
+        @include display(flex);
+        @include flex-flow(column nowrap);
+        @include align-items(flex-start);
+        @include column;
+        &.one {
+            width: column-width(1, $base-width, $base-width);
+        }
+        &.one.third {
+            @include third($num: 1);
+        }
+        &.two.thirds {
+            @include third($num: 2);
+        }
+        &.one.half {
+            width: column-width(8, $base-width, $base-width);
+        }
+    }
+    &> .columns {
+        @include display(flex);
+        @include flex-flow(column wrap);
+        @include align-items(flex-start);
+        @include columns;
+        @include number-columns;
+        &.right.aligned{
+            @include align-items(flex-end);
+        }
+    }
+    &> .column,
+    &> .columns{
+        img {
+            width: 100%;
+        }
+        &:first-child {
+            @include alpha;
+
+        }
+    }
+    &.columns{
+        @include evenly-columns;
+    }
+}
+
+.columns + .columns{
+    
+}
+

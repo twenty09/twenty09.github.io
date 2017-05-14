@@ -1,0 +1,24 @@
+#header {
+    margin-top: 80px;
+    margin-bottom: 120px;
+}
+
+
+.carousel {
+  background: white;
+}
+
+.cell {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 135px;
+  height: 200px;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.cell.is-selected {
+  
+}
+

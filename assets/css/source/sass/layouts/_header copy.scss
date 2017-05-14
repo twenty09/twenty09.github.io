@@ -1,0 +1,116 @@
+// FUNCTIONS
+// ==========================================
+
+
+
+// SCREENS
+// ==========================================
+
+/* 
+ * Header
+ */
+
+
+header{
+    @include display(flex);
+    @include flex-flow(column nowrap);
+    @include justify-content(start);
+    @include box-orient(vertical);
+    @include box-pack(center);
+    @include box-direction(normal);
+    @include position($position: fixed, $top: 0, $left:0);
+    @include size($height: 100vh);
+    background: white;
+    padding: 16px 24px;
+}
+
+/* 
+ * Branding
+ */
+
+.branding{
+    a{
+        font-size: 34px;
+        letter-spacing: 0.5px;
+        font-weight: bold;
+        svg{
+            width: 100%;
+        }
+    }
+}
+
+/* 
+ * Nav
+ */
+
+nav {
+    ul,
+    ol {
+        list-style: none;
+        list-style-image: none;
+    }
+}
+
+nav.main{
+    ul.list{
+        padding:0;
+        margin: 0;
+        li {
+            clear: left;
+            display: block;
+            float: left;
+            line-height: 1;
+            margin-bottom: 0;
+            padding: 16px 0px;
+            @include backface-visibility(hidden);
+            @include transform(translate3d(0,0,0));
+            a {
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: 1.6px;
+                padding: 5px 0;
+                display: inline-block;
+            }
+            nav.sub {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                visibility: hidden;
+                @include backface-visibility(hidden);
+                @include transform(translate3d(0,0,0));
+                @include transition(opacity .25s cubic-bezier(.4,0,.2,1),max-height .5s cubic-bezier(.4,0,.2,1),visibility 0s .5s);
+                
+                ul.sub.list{
+                    li{
+                        padding:4px 0 4px 16px;
+                        &:first-child{
+                            padding-top: 8px;
+                        }
+                    }
+                    
+                }
+            } 
+            &.active,
+            &:hover{
+                nav.sub {
+                    max-height: 200px;
+                    opacity: 1;
+                    visibility: visible;
+                    width: auto;
+                    @include transition(opacity .25s cubic-bezier(.4,0,.2,1) .125s,max-height .5s cubic-bezier(.4,0,.2,1));
+                }
+            }
+            &.active{
+                > a{
+                    @include border-print($bottom:$border-width);
+                }
+            }
+            
+        }
+    } 
+}
+
+
+
+
+

@@ -1,0 +1,27 @@
+// FUNCTIONS
+// ==========================================
+
+
+// SCREENS
+// ==========================================
+
+/* List
+   ========================================== */
+
+.list{
+    @include flexbox(( display: flex, flex-direction: column, align-items: flex-start));
+    @include size($width: 100%);
+    .item{
+        position: relative;
+        @include flexbox(( display: flex, align-items: center, ));
+        padding: 10px 0;
+        border-top: 1px solid $border-color;
+        .meta + .header{
+             margin-left: 5px;
+        }
+        &:first-child{
+            border-top:none;
+        }
+        
+    }
+}

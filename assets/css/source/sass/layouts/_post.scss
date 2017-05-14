@@ -1,0 +1,116 @@
+// FUNCTIONS
+// ==========================================
+
+
+
+// SCREENS
+// ==========================================
+
+
+/* 
+ * Posts
+ */
+
+
+.content{
+    padding-left: $padding;
+    padding-right: $padding;
+    margin-bottom: 0;
+    
+    .posts{
+        @include border($right:$border-width);
+        padding-right: 2%;
+        width: 100%;
+        // Post
+        .post{
+            width: 100%;
+            @include border($bottom:$border-width);
+            margin: pt(3) 0;
+            &:first-child{
+                margin-top:0;
+            }
+            .content{
+                padding: 0;
+                margin: 0;
+                img{
+                    margin: pt(2) 0;
+                }
+            }
+        }
+        .pagination{
+            width: 100%;
+            @include border($bottom:$border-width);
+            padding-bottom: pt(15);
+            > .menu{
+                > .item{
+                    width: 95px;  
+                }
+            }
+            .item + .item{
+                margin-left: pt(2)
+            }
+        }
+    }
+    .widgets{
+        .widget{
+            width: 100%;
+            margin: pt(3) 0;
+            &:first-child{
+                margin-top:0;
+            }
+            .title{
+                @include border($bottom:$border-width, $color: $color-black);
+                margin: 0;
+                padding: 0 0 10px;
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 1.1em;
+                letter-spacing:-1px;
+                width: 100%;
+                @include font-smoothing($value: antialiased);
+
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                li {
+                    @include border($bottom:$border-width);
+                    padding: pt(1) 0;
+                    
+                    line-height: 1.2;
+                    &:first-child{
+                        padding-top: pt(2);
+                    }
+                    span{
+                        color: $text-color-sub !important;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 
+ * Responsive Posts
+ */
+
+@media only screen and (max-width: $med-max-width) {
+    .content {
+        > .posts{
+            width: 100% !important;
+            padding-right: 0;
+            box-shadow: none;
+            .post > .title{
+                font-size: 30px;
+                letter-spacing: -0.5px;
+            }
+        }
+        > .widgets{
+            display: none;
+        }
+    }
+}
+
+

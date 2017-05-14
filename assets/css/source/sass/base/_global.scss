@@ -1,0 +1,346 @@
+// FUNCTIONS
+// ==========================================
+
+@mixin font-smoothing($value: antialiased) {
+  @if $value == antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+// 8px
+@function pt($number){
+    @return $number*8px;
+}
+
+// Font Family
+@mixin font($family: false, $size: false, $colour: false, $weight: false,  $lh: false) {
+    @if $family { font-family: $family;}
+    @if $size { font-size: $size; }
+    @if $colour { color: $colour; }
+    @if $weight { font-weight: $weight; }
+    @if $lh { line-height: $lh; }
+}
+
+
+@mixin letter-spacing($font-size){
+    $font-size : $font-size / 1px;
+    letter-spacing: -($font-size*0.01)*1px;
+}
+
+@mixin letter-spacing-positive($font-size){
+    $font-size : $font-size / 1px;
+    letter-spacing: ($font-size*0.01)*1px;
+}
+
+// Position
+@mixin position($position: null, $top: null, $right: null, $bottom: null, $left: null) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+// Width & Height
+@mixin size($width:null, $height:null, $min-width:null, $min-height: null, $max-width:null, $max-height: null) {
+    width: $width;
+    height: $height;
+    min-width: $min-width;
+    min-height: $min-height;
+    max-width: $max-width;
+    max-height: $max-height;
+}
+
+
+// Headers
+@mixin all-headers{
+    &1, &2, &3, &4, &5, &6{
+        margin-top: 0;
+        margin-bottom: 2rem;
+        font-weight: normal;
+    }
+}
+
+@mixin each-header{
+    @for $i from 1 through length($header) {
+        &#{$i} {
+            font-family: 'Playfair Display', serif;
+            font-size: nth($header, $i);
+            line-height: nth($header-line-height, $i);
+            letter-spacing: nth($header-letter-spacing, $i);
+            &.uppercase{
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+
+// Border
+@mixin border($top: null, $bottom: null, $left: null, $right: null, $color: $border-color) {
+
+    @if ($top == null){
+        @if ($bottom== null){
+            @if ($left== null){
+                // Right
+                box-shadow: inset -#{$right} 0 0 0 $color;
+            }
+            @else{
+                @if ($right== null){
+                    // Left
+                    box-shadow: inset #{$left} 0 0 0 $color;
+                }
+                @else{
+                    // Left + Right
+                    box-shadow: 
+                        inset -#{$right} 0 0 0 $color,
+                        inset #{$left} 0 0 0 $color;
+                }
+            }
+        }
+        @else{
+            @if ($left== null){
+                @if ($right== null){
+                    // Bottom
+                    box-shadow: inset 0 -#{$bottom} 0 0 $color;
+                }
+                @else{
+                    // Bottom + Right
+                    box-shadow: 
+                        inset 0 -#{$bottom} 0 0 $color,
+                        inset -#{$right} 0 0 0 $color;
+                }
+            }
+            @else{
+                @if ($right== null){
+                    // Bottom + Left
+                    box-shadow: 
+                        inset 0 -#{$bottom} 0 0 $color,
+                        inset #{$left} 0 0 0 $color;
+                }
+                @else{
+                    // Bottom + Left + Right
+                    box-shadow: 
+                        inset 0 -#{$bottom} 0 0 $color,
+                        inset #{$left} 0 0 0 $color,
+                        inset -#{$right} 0 0 0 $color;
+                }
+            }
+        }
+    }
+    @else{
+        @if ($bottom== null){
+            @if ($left== null){
+                @if ($right== null){
+                    // Top
+                    box-shadow: inset 0 $top 0 0 $color;
+                }
+                @else{
+                    // Top + Right
+                    box-shadow: 
+                        inset 0 #{$top} 0 0 $color,
+                        inset -#{$right} 0 0 0 $color;
+                }
+            }
+            @else{
+                @if ($right== null){
+                    // Top + Left
+                    box-shadow: 
+                        inset 0 #{$top} 0 0 $color,
+                        inset #{$left} 0 0 0 $color;
+                }
+                @else{
+                    // Top + Left + Right
+                    box-shadow: 
+                        inset 0 #{$top} 0 0 $color,
+                        inset #{$left} 0 0 0 $color,
+                        inset -#{$right} 0 0 0 $color;
+                }
+            }
+        }
+        @else{
+            @if ($left== null){
+                @if ($right== null){
+                    // Top + Bottom
+                    box-shadow: 
+                        inset 0 #{$top} 0 0 $color,
+                        inset 0 -#{$border-width} 0 0 $color;
+                }
+                @else{
+                    // Top + Bottom + Right
+                    box-shadow: 
+                        inset 0 #{$top} 0 0 $color,
+                        inset 0 -#{$bottom} 0 0 $color,
+                        inset -#{$right} 0 0 0 $color;
+                }
+            }
+            @else{
+                @if ($right== null){
+                    // Top + Bottom + Left
+                    box-shadow: 
+                        inset 0 #{$top} 0 0 $color,
+                        inset 0 -#{$bottom} 0 0 $color,
+                        inset #{$left} 0 0 0 $color;
+                }
+                @else{
+                    // Top + Bottom + Left + Right
+                    box-shadow: 
+                        inset 0 #{$top} 0 0 $color,
+                        inset 0 -#{$bottom} 0 0 $color,
+                        inset #{$left} 0 0 0 $color,
+                        inset -#{$right} 0 0 0 $color;
+                }
+            }
+        }
+    }
+}
+
+
+// SCREENS
+// ==========================================
+
+
+/* Global
+   ========================================== */
+
+html, 
+body {
+    height: 100%;
+}
+
+html {
+    font-size: $font-size;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+body {
+    @include font(($font-family), $font-size, $text-color, $font-weight-default, $font-line-height);
+    overflow-x: hidden;
+    background: $background-outside;
+    @include font-smoothing($value: antialiased);
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+ * Headers
+ */
+
+h{
+    @include all-headers;
+    @include each-header;
+}
+
+/* 
+ * Images
+ */
+
+img {
+    .responsive{
+        max-width: 100%;
+        height: auto;
+    }
+    &.half {
+        width: 50%;
+    }
+    a { 
+        border:none; 
+    }
+}
+
+/*
+ * Misc Inline elements
+ */
+
+em, 
+i { 
+    font-style:italic; 
+}
+
+strong, 
+b { 
+    font-weight:bold; 
+}
+
+abbr, 
+acronym {
+    border:none;
+    font-style:normal;
+}
+
+blockquote {
+    margin:0 3em;
+    font-style:italic;
+}
+
+dt { font-weight:bold; }
+dd { margin-left:1.5em; }
+
+/*
+ * Links
+ */
+
+/*
+a{
+    &:link, 
+    &:visited { 
+        color: $color-link; 
+    }
+    &:hover,
+    &:active { 
+        color: $color-link-hover; 
+    }
+}
+*/
+
+p{
+    margin-bottom: 1.2rem;
+    margin-top: 0;
+}
+
+a{
+    color: $text-color;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+    @include font-smoothing($value: antialiased);
+    
+}
+
+.title{
+    font-size: pt(5);
+    font-weight: 500;
+    letter-spacing:-1px;
+    margin-bottom: 0;
+    @include font-smoothing($value: antialiased);
+}
+
+.meta{
+    @include font-smoothing($value: antialiased);
+    font-size:$font-size-meta;
+    @include letter-spacing-positive(10px);
+    color: $text-meta-color;
+    font-weight: $font-weight-meta;
+    margin-top: pt(1);
+    .category{
+        text-transform: lowercase;
+    }
+}
+
+
+.bTop.visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.bTop.fadeOut {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+

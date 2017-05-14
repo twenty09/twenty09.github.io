@@ -1,0 +1,33 @@
+// FUNCTIONS
+// ==========================================
+
+
+
+// SCREENS
+// ==========================================
+
+/* 
+ * Footer
+ */
+
+footer{
+    background: $background-secondary;
+    padding-top: pt(5);
+    padding-left: pt(5);
+    padding-right: pt(5);
+    padding-bottom: pt(5);
+    .row{
+        margin-bottom: 0;
+        .logo{
+            margin-bottom: pt(2);
+        }
+    }
+    .copyright{
+        p{
+           font-size: 13px; 
+            color: #999;
+        }
+
+    }
+   
+}

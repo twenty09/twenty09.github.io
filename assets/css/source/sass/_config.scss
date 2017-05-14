@@ -1,0 +1,103 @@
+// VARIABLES
+// ==========================================
+
+// $sizes
+$sizes: ('mini': 0.7, 'tiny': 0.8, 'small': 0.9, 'medium': 1, 'big': 1.2, 'large': 1.6, 'huge': 2);
+
+// $widths
+$base-width: 960px;
+$tablet-width: 768px;
+$mobile-portrait-width: 300px;
+$mobile-landscape-width: 420px;
+
+$num-columns: 16;
+$margin: 2%;
+$offset: 2 * $margin;
+$top-max-width: 959px;
+$top-min-width: 768px;
+$med-max-width: $top-min-width - 1;
+$bot-max-width: $med-max-width;
+$bot-min-width: 480px;
+
+// $sixteen base
+$sixteen-items: (
+    'one',
+    'two', 
+    'three', 
+    'four', 
+    'five', 
+    'six', 
+    'seven', 
+    'eight', 
+    'nine', 
+    'ten', 
+    'eleven', 
+    'twelve', 
+    'thirteen', 
+    'fourteen', 
+    'fifteen', 
+    'sixteen');
+
+
+// $font
+$font-family: 'Sailec','Helvetica Neue',Helvetica,Arial,sans-serif;
+$font-line-height: 1.5;
+$font-size: 15px;
+$font-weight-default: normal;
+
+$font-size-meta: 12px;
+$font-weight-meta: 300;
+
+// $headers
+$header: (4rem, 3.6rem, 3rem, 2.4rem, 1.8rem, 1.5rem);
+$header-line-height: (1.2, 1.25, 1.3, 1.35, 1.5, 1.6);
+$header-letter-spacing: (-.1rem, -.1rem, -.1rem, -.08rem, -.05rem, 0 );
+
+
+// $colors
+
+$color-black:black;
+$color-turquoise-green:#96CEB4;
+$color-mustard:#FFCC5C;
+$color-navajo-white:#FFEEAD;
+$color-bittersweet:#FF6F69;
+$color-platinum:#E2E2E2;
+$color-denim:#4C586F;
+$color-gunmetal:#3E3E3B;
+$color-lavender: #6B82A8;
+$color-jasmine: #E9C77B;
+$color-link: lighten($color-denim, 10%);
+$color-link-hover: darken($color-denim, 10%);
+
+$color-grey: grey;
+$color-green: green;
+
+
+// $screen
+$color-primary: $color-black;
+$color-secondary: #110f4a;
+$text-color: $color-primary;
+$text-color-sub: #717171;
+$text-meta-color: $text-color-sub;
+
+
+// $border
+$border-width: 1px;
+$border-color: #D4D4D4;
+$border-color-transparent: transparent;
+$border: inset 0px 0px 0px $border-width $border-color;
+
+// $background
+$background-outside: #333;
+$background-inside: white;
+$background-secondary:$color-secondary;
+
+// $padding
+$padding: 40px;
+
+
+// $branding
+$svg-width:64px;
+$svg-height:57px;
+
+
